@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-abr-2017 11:46:00 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="com.codo.modelo.pojos.Monedas" table="monedas" catalog="db_contabilidad_domestica" optimistic-lock="version">
+        <id name="idMoneda" type="java.lang.Integer">
+            <column name="idMoneda" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <set name="cuentases" table="cuentas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idMoneda" not-null="true" />
+            </key>
+            <one-to-many class="com.codo.modelo.pojos.Cuentas" />
+        </set>
+    </class>
+</hibernate-mapping>

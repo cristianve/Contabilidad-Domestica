@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-abr-2017 11:46:00 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+ <class catalog="db_contabilidad_domestica"
+  name="com.codo.modelo.pojos.Movimientos" table="movimientos">
+  <id name="idMovimiento" type="java.lang.Integer">
+   <column name="idMovimiento"/>
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="com.codo.modelo.pojos.Cuentas" fetch="select"
+   lazy="false" name="cuentasByIdCuentaDestino">
+   <column name="idCuentaDestino"/>
+  </many-to-one>
+  <many-to-one class="com.codo.modelo.pojos.Cuentas" fetch="select"
+   lazy="false" name="cuentasByIdCuentaOrigen">
+   <column name="idCuentaOrigen" not-null="true"/>
+  </many-to-one>
+  <many-to-one class="com.codo.modelo.pojos.Etiquetas" fetch="select"
+   lazy="false" name="etiquetas">
+   <column name="idEtiqueta" not-null="true"/>
+  </many-to-one>
+  <many-to-one class="com.codo.modelo.pojos.Tipos" fetch="select"
+   lazy="false" name="tipos" not-null="true">
+   <column name="idTipo" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="valor" type="double">
+   <column name="valor" not-null="true" precision="12"/>
+  </property>
+  <property generated="never" lazy="false" name="fecha" type="date">
+   <column length="10" name="fecha" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="descripcion" type="string">
+   <column length="65535" name="descripcion"/>
+  </property>
+ </class>
+</hibernate-mapping>

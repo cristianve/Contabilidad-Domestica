@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-abr-2017 11:46:00 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="com.codo.modelo.pojos.Tipos" table="tipos" catalog="db_contabilidad_domestica" optimistic-lock="version">
+        <id name="idTipo" type="java.lang.Integer">
+            <column name="idTipo" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <set name="movimientoses" table="movimientos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idTipo" not-null="true" />
+            </key>
+            <one-to-many class="com.codo.modelo.pojos.Movimientos" />
+        </set>
+        <set name="etiquetases" table="etiquetas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idTipo" not-null="true" />
+            </key>
+            <one-to-many class="com.codo.modelo.pojos.Etiquetas" />
+        </set>
+        <set name="previsioneses" table="previsiones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idTipo" not-null="true" />
+            </key>
+            <one-to-many class="com.codo.modelo.pojos.Previsiones" />
+        </set>
+    </class>
+</hibernate-mapping>

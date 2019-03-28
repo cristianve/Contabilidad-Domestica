@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-abr-2017 11:46:00 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+ <class catalog="db_contabilidad_domestica"
+  name="com.codo.modelo.pojos.Cuentas" table="cuentas">
+  <id name="idCuenta" type="java.lang.Integer">
+   <column name="idCuenta"/>
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="com.codo.modelo.pojos.Monedas" fetch="select"
+   lazy="false" name="monedas">
+   <column name="idMoneda" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="45" name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="saldo" type="java.lang.Double">
+   <column name="saldo" precision="12"/>
+  </property>
+  <property generated="never" lazy="false" name="descripcion" type="string">
+   <column length="65535" name="descripcion"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true"
+   name="movimientosesForIdCuentaDestino" sort="unsorted" table="movimientos">
+   <key>
+    <column name="idCuentaDestino"/>
+   </key>
+   <one-to-many class="com.codo.modelo.pojos.Movimientos"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="movimientosesForIdCuentaOrigen" sort="unsorted" table="movimientos">
+   <key>
+    <column name="idCuentaOrigen" not-null="true"/>
+   </key>
+   <one-to-many class="com.codo.modelo.pojos.Movimientos"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="previsionesesForIdCuentaOrigen" sort="unsorted" table="previsiones">
+   <key>
+    <column name="idCuentaOrigen" not-null="true"/>
+   </key>
+   <one-to-many class="com.codo.modelo.pojos.Previsiones"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true"
+   name="previsionesesForIdCuentaDestino" sort="unsorted" table="previsiones">
+   <key>
+    <column name="idCuentaDestino"/>
+   </key>
+   <one-to-many class="com.codo.modelo.pojos.Previsiones"/>
+  </set>
+ </class>
+</hibernate-mapping>
